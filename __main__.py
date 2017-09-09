@@ -1,6 +1,6 @@
 import sys
 import os
-import random
+from random import randint
 import time
 from optparse import OptionParser
 from urllib.parse import urlencode
@@ -9,7 +9,15 @@ from threading import Thread
 
 
 def send_request(url):
-    post_fields = {"Category": "swipe"}
+
+    gender_rand = randint(0, 1)
+    gender = "male"
+    if gender_rand == 0:
+        gender = "female"
+    else:
+        gender = "male"
+
+    post_fields = {"Category": "swipe", "Gender" : gender}
 
     request = Request(url, urlencode(post_fields).encode())
     return urlopen(request)
