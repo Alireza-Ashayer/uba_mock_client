@@ -9,15 +9,18 @@ from threading import Thread
 
 
 def send_request(url):
-
-    gender_rand = randint(0, 1)
+    user_name_int = randint(0, 100)
+    user_name = "user_" + str(user_name_int)
+    total_length = randint(0, 10)
+    gender_rand = user_name_int % 2
     gender = "male"
     if gender_rand == 0:
         gender = "female"
     else:
         gender = "male"
+        total_length += 5
 
-    post_fields = {"Category": "swipe", "Gender" : gender}
+    post_fields = {"Category": "swipe", "Username" : user_name, "Gender": gender, "Total_length" : total_length}
 
     request = Request(url, urlencode(post_fields).encode())
     return urlopen(request)
